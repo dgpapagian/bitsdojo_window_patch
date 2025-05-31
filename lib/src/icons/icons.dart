@@ -66,15 +66,16 @@ class _RestorePainter extends _IconPainter {
   void paint(Canvas canvas, Size size) {
     Paint p = getPaint(color);
     const double radius = 2.0;
-    final RRect frontWindow = RRect.fromRectAndRadius(
+    final RRect backWindow = RRect.fromRectAndRadius(
       Rect.fromLTRB(2, 0, size.width, size.height - 2),
       Radius.circular(radius),
     );
-    final RRect backWindow = RRect.fromRectAndRadius(
+
+    final RRect frontWindow = RRect.fromRectAndRadius(
       Rect.fromLTRB(0, 2, size.width - 2, size.height),
       Radius.circular(radius),
     );
-    canvas.drawRRect(frontWindow, p);
+
     final Path backPath = Path()..addRRect(backWindow);
     final Path frontPath = Path()..addRRect(frontWindow);
 
@@ -83,7 +84,9 @@ class _RestorePainter extends _IconPainter {
       backPath,
       frontPath,
     );
+
     canvas.drawPath(clippedBackPath, p);
+    canvas.drawRRect(frontWindow, p);
   }
 }
 
