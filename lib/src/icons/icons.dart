@@ -21,7 +21,7 @@ class GlyphIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<String?>(
-      future: SystemFonts().loadFont('Segoe Fluent Icons'),
+      future: SystemFonts().loadFont('SegoeIcons'),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done &&
             snapshot.hasData &&
