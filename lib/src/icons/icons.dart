@@ -61,18 +61,24 @@ class RestoreIcon extends StatelessWidget {
 
 class _RestorePainter extends _IconPainter {
   _RestorePainter(Color color) : super(color);
+
   @override
   void paint(Canvas canvas, Size size) {
     Paint p = getPaint(color);
-    canvas.drawRect(Rect.fromLTRB(0, 2, size.width - 2, size.height), p);
-    canvas.drawLine(Offset(2, 2), Offset(2, 0), p);
-    canvas.drawLine(Offset(2, 0), Offset(size.width, 0), p);
-    canvas.drawLine(
-        Offset(size.width, 0), Offset(size.width, size.height - 2), p);
-    canvas.drawLine(Offset(size.width, size.height - 2),
-        Offset(size.width - 2, size.height - 2), p);
+    const double radius = 2.0;
+    final RRect backWindow = RRect.fromRectAndRadius(
+      Rect.fromLTRB(0, 2, size.width - 2, size.height),
+      Radius.circular(radius),
+    );
+    canvas.drawRRect(backWindow, p);
+    final RRect frontWindow = RRect.fromRectAndRadius(
+      Rect.fromLTRB(2, 0, size.width, size.height - 2),
+      Radius.circular(radius),
+    );
+    canvas.drawRRect(frontWindow, p);
   }
 }
+
 
 /// Minimize
 class MinimizeIcon extends StatelessWidget {
