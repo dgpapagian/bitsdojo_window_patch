@@ -1,17 +1,18 @@
 import 'dart:math';
 import 'package:flutter/widgets.dart';
+import 'package:system_fonts/system_fonts.dart';
 
 // Switched to CustomPaint icons by https://github.com/esDotDev
 
 class GlyphIcon extends StatelessWidget {
-  final String glyph;
+  final int codePoint;
   final Color color;
   final double size;
   final Alignment alignment;
 
   const GlyphIcon({
     Key? key,
-    required this.glyph,
+    required this.codePoint,
     required this.color,
     this.size = 12,
     this.alignment = Alignment.center,
@@ -19,16 +20,27 @@ class GlyphIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: alignment,
-      child: Text(
-        glyph,
-        style: TextStyle(
-          fontFamily: 'Segoe UI Symbol',
-          fontSize: size,
-          color: color,
-        ),
-      ),
+    return FutureBuilder<String?>(
+      future: SystemFonts().loadFont('Segoe Fluent Icons'),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done &&
+            snapshot.hasData &&
+            snapshot.data != null) {
+          return Align(
+            alignment: alignment,
+            child: Text(
+              String.fromCharCode(codePoint),
+              style: TextStyle(
+                fontFamily: snapshot.data!,
+                fontSize: size,
+                color: color,
+              ),
+            ),
+          );
+        } else {
+          return const SizedBox.shrink();
+        }
+      },
     );
   }
 }
@@ -125,7 +137,7 @@ class MinimizeIcon extends StatelessWidget {
   MinimizeIcon({Key? key, required this.color}) : super(key: key);
   @override
   Widget build(BuildContext context) =>
-      GlyphIcon(glyph: String.fromCharCode(0xe921), color: color);
+      GlyphIcon(codePoint: 0xe921, color: color);
 }
 
 class _MinimizePainter extends _IconPainter {
