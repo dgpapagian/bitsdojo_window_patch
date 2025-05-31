@@ -14,7 +14,7 @@ class GlyphIcon extends StatelessWidget {
     Key? key,
     required this.codePoint,
     required this.color,
-    this.size = 12,
+    this.size = 10,
     this.alignment = Alignment.center,
   }) : super(key: key);
 
@@ -38,7 +38,7 @@ class GlyphIcon extends StatelessWidget {
             ),
           );
         } else {
-          return const SizedBox.shrink();
+          return const SizedBox.expand();
         }
       },
     );
@@ -83,10 +83,3 @@ class MinimizeIcon extends StatelessWidget {
   Widget build(BuildContext context) =>
       GlyphIcon(codePoint: 0xe921, color: color); //ChromeMinimize
 }
-
-
-Paint getPaint(Color color, [bool isAntiAlias = false]) => Paint()
-  ..color = color
-  ..style = PaintingStyle.stroke
-  ..isAntiAlias = isAntiAlias
-  ..strokeWidth = 1;
