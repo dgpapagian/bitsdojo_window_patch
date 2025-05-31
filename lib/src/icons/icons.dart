@@ -2,8 +2,6 @@ import 'dart:math';
 import 'package:flutter/widgets.dart';
 import 'package:system_fonts/system_fonts.dart';
 
-// Switched to CustomPaint icons by https://github.com/esDotDev
-
 class GlyphIcon extends StatelessWidget {
   final int codePoint;
   final Color color;
@@ -18,10 +16,13 @@ class GlyphIcon extends StatelessWidget {
     this.alignment = Alignment.center,
   }) : super(key: key);
 
+  static final Future<String?> _fontFuture =
+      SystemFonts().loadFont('SegoeIcons');
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<String?>(
-      future: SystemFonts().loadFont('SegoeIcons'),
+      future: _fontFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done &&
             snapshot.hasData &&
@@ -38,12 +39,19 @@ class GlyphIcon extends StatelessWidget {
             ),
           );
         } else {
-          return const SizedBox.expand();
+          return Align(
+            alignment: alignment,
+            child: SizedBox(
+              height: size,
+              width: size,
+            ),
+          );
         }
       },
     );
   }
 }
+
 
 /// Close
 class CloseIcon extends StatelessWidget {
