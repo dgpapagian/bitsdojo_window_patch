@@ -161,6 +161,9 @@ class MaximizeWindowButton extends WindowButton {
             colors: colors,
             animate: animate ?? false,
             iconBuilder: (buttonContext) =>
+                appWindow.isMaximized
+                ? RestoreIcon(color: buttonContext.iconColor)
+                :
                 MaximizeIcon(color: buttonContext.iconColor),
             onPressed: onPressed ?? () => appWindow.maximizeOrRestore());
 }
