@@ -1,8 +1,37 @@
 import 'dart:math';
-
 import 'package:flutter/widgets.dart';
 
 // Switched to CustomPaint icons by https://github.com/esDotDev
+
+class GlyphIcon extends StatelessWidget {
+  final String glyph;
+  final Color color;
+  final double size;
+  final Alignment alignment;
+
+  const GlyphIcon({
+    Key? key,
+    required this.glyph,
+    required this.color,
+    this.size = 12,
+    this.alignment = Alignment.center,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: alignment,
+      child: Text(
+        glyph,
+        style: TextStyle(
+          fontFamily: 'Segoe UI Symbol',
+          fontSize: size,
+          color: color,
+        ),
+      ),
+    );
+  }
+}
 
 /// Close
 class CloseIcon extends StatelessWidget {
@@ -39,7 +68,7 @@ class _MaximizePainter extends _IconPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint p = getPaint(color);
-    const double radius = 2.0;
+    const double radius = 1.0;
     final RRect rRect = RRect.fromRectAndRadius(
       Rect.fromLTRB(0, 0, size.width - 1, size.height - 1),
       Radius.circular(radius),
@@ -95,7 +124,8 @@ class MinimizeIcon extends StatelessWidget {
   final Color color;
   MinimizeIcon({Key? key, required this.color}) : super(key: key);
   @override
-  Widget build(BuildContext context) => _AlignedPaint(_MinimizePainter(color));
+  Widget build(BuildContext context) =>
+      GlyphIcon(glyph: String.fromCharCode(0xe921), color: color);
 }
 
 class _MinimizePainter extends _IconPainter {
