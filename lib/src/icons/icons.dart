@@ -70,15 +70,25 @@ class _RestorePainter extends _IconPainter {
       Rect.fromLTRB(0, 2, size.width - 2, size.height),
       Radius.circular(radius),
     );
-    canvas.drawRRect(backWindow, p);
+
     final RRect frontWindow = RRect.fromRectAndRadius(
       Rect.fromLTRB(2, 0, size.width, size.height - 2),
       Radius.circular(radius),
     );
+
+    final Path backPath = Path()..addRRect(backWindow);
+    final Path frontPath = Path()..addRRect(frontWindow);
+
+    final Path clippedBackPath = Path.combine(
+      PathOperation.difference,
+      backPath,
+      frontPath,
+    );
+
+    canvas.drawPath(clippedBackPath, p);
     canvas.drawRRect(frontWindow, p);
   }
 }
-
 
 /// Minimize
 class MinimizeIcon extends StatelessWidget {
