@@ -51,7 +51,7 @@ class CloseIcon extends StatelessWidget {
   CloseIcon({Key? key, required this.color}) : super(key: key);
   @override
   Widget build(BuildContext context) =>
-      GlyphIcon(codePoint: 0xe921, color: color);
+      GlyphIcon(codePoint: 0xe8bb, color: color); //ChromeClose
 }
 
 /// Maximize
@@ -60,7 +60,7 @@ class MaximizeIcon extends StatelessWidget {
   MaximizeIcon({Key? key, required this.color}) : super(key: key);
   @override
   Widget build(BuildContext context) =>
-      GlyphIcon(codePoint: 0xe921, color: color);
+      GlyphIcon(codePoint: 0xe922, color: color); //ChromeMaximize
 }
 
 /// Restore
@@ -72,8 +72,7 @@ class RestoreIcon extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) =>
-      GlyphIcon(codePoint: 0xe921, color: color);
-
+      GlyphIcon(codePoint: 0xe923, color: color); //ChromeRestore
 }
 
 /// Minimize
@@ -82,7 +81,7 @@ class MinimizeIcon extends StatelessWidget {
   MinimizeIcon({Key? key, required this.color}) : super(key: key);
   @override
   Widget build(BuildContext context) =>
-      GlyphIcon(codePoint: 0xe921, color: color);
+      GlyphIcon(codePoint: 0xe921, color: color); //ChromeMinimize
 }
 
 
