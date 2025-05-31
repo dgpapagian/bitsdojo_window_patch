@@ -39,7 +39,7 @@ class _MaximizePainter extends _IconPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint p = getPaint(color);
-    const double radius = 1.0;
+    const double radius = 2.0;
     final RRect rRect = RRect.fromRectAndRadius(
       Rect.fromLTRB(0, 0, size.width - 1, size.height - 1),
       Radius.circular(radius),
